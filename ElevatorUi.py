@@ -50,6 +50,7 @@ class ElevatorUi:
 
     def draw(self):
         self.root.mainloop()
+
     def update_drawing(self):
         self.root.update()
 
