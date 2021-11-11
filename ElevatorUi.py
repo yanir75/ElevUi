@@ -50,6 +50,8 @@ class ElevatorUi:
 
     def draw(self):
         self.root.mainloop()
+    def update_drawing(self):
+        self.root.update()
 
     def move_to_the_middle(self):
         for i in self.rectText:
