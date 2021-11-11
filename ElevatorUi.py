@@ -59,7 +59,7 @@ class ElevatorUi:
     def move_from_1_to_10(self, event):
         if event.char == "x":
             for i in range(9):
-                self.move(0, 1)
+                self.move_elev(0, 1)
                 self.root.update()
                 time.sleep(1)
 
@@ -81,15 +81,7 @@ class ElevatorUi:
             count += 1
 
     def entered_the_elev(self, num):
-        self.canvas.itemconfig(el.peopleList[num], fill='white')
+        self.canvas.itemconfig(self.peopleList[num], fill='white')
 
     def exited_the_elev(self, num):
-        self.canvas.itemconfig(el.peopleList[num], fill='green')
-
-
-el = ElevatorUi(15, 10)
-el.create_people(5)
-el.move_people_to_elev(4)
-el.number_of_floors(-5, 9)
-el.move_elev(1, 2)
-el.draw()
+        self.canvas.itemconfig(self.peopleList[num], fill='green')
