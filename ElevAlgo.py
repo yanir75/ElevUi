@@ -1,19 +1,56 @@
+import builder
 
 
+class ElevAlgo:
+    def __init__(self, building, calls):
+        self.building = builder.building_from_json(building)
+        self.calls = builder.calls_from_CSV(calls)
+        self.calls_of_elev = [[]]
+        self.route = [[]]
 
-class Elevator:
+    def empty_route(self, elev):
+        el = self.building.getElev(elev)
+        if el.state == 1:
+            el.state = -1
+        elif el.state == -1:
+            el.state = 1
+        for i in self.calls_of_elev[elev]:
+            if el.state == 1 and i.src > el.pos and i.status != 1:
+                self.route[elev].append(i.src)
+                i.status = 1
+            if el.state == 1 and i.dest > i.src > el.pos:
+                self.route[elev].append(i.dest)
+            if el.state == -1 and i.src < el.pos and i.status != 1:
+                self.route[elev].append(i.src)
+                i.status = 1
+            if el.state == -1 and i.dest < i.src < el.pos:
+                self.route[elev].append(i.dest)
+            if i.status == 1 and el.state == 1 and i.dest > el.pos:
+                self.route[elev].append(i.dest)
+            if i.status == 1 and el.state == -1 and i.dest < el.pos:
+                self.route[elev].append(i.dest)
+            if el.state == 0:
+                if i.src > el.pos:
+                    self.route[elev].append(i.src)
+                    el.state = 1
+                elif i.src < el.pos:
+                    self.route[elev].append(i.src)
+                    el.state = -1
+                else:
+                    if i.dest > el.pos:
+                        self.route[elev].append(i.dest)
+                        el.state = 1
+                    elif i.dest < el.pos:
+                        self.route[elev].append(i.dest)
+                        el.state = -1
 
-    def __init__(self, elev):
-        self.pos = 0
-        self.stopTime = elev['_stopTime']
-        self.startTime = elev['_startTime']
-        self.openTime = elev['_openTime']
-        self.closeTime = elev['_closeTime']
-        self.maxFloor = elev['_maxFloor']
-        self.minFloor = elev['_minFloor']
-        self.speed = elev['_speed']
-        self.id = elev['_id']
-        self.state = 0 # 0 waiting -1 down 1 up
-
-    def __str__(self):
-        return f"elev ID: {self.id}  start time: {self.startTime}  stop time: {self.stopTime}  open time: {self.openTime} +  close time: {self.closeTime}  max floor: {self.maxFloor}  min floor: {self.minFloor}  speed: {self.speed}  pos: {self.pos} "
+    def fix_route(self, elev, call):
+        el = self.building.getElev(elev)
+        if el.pos < call.src and el.state == 1:
+            self.route[elev].append(call.src)
+        if el.pos < call.src < call.dest and el.state == 1:
+            self.route[elev].append(call.dest)
+        if el.pos > call.src and el.state == -1:
+            self.route[elev].append(call.src)
+        if el.pos > call.src > call.dest and el.state == -1:
+            self.route[elev].append(call.dest)

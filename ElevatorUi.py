@@ -19,9 +19,9 @@ class ElevatorUi:
         self.rectList = self.draw_elev()
         self.peopleList = []
 
-    def move_elev(self, elev, floors):
-        self.canvas.move(self.rectList[elev], 0, -self.height / self.floorsNum * floors)
-        self.canvas.move(self.rectText[elev], 0, -self.height / self.floorsNum * floors)
+    def move_elev(self, elev, floors,speed=1):
+        self.canvas.move(self.rectList[elev], 0, -self.height / self.floorsNum * floors*speed)
+        self.canvas.move(self.rectText[elev], 0, -self.height / self.floorsNum * floors*speed)
 
     def move_people_up(self, pep, where_to):
         self.canvas.move(pep, 0, -self.height / self.floorsNum * where_to)
