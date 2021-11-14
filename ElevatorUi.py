@@ -88,11 +88,11 @@ class ElevatorUi:
         self.update_drawing()
 
     def move_from_1_to_10(self, event):
-        if event.char == "x":
-            for i in range(9):
-                self.move_elev(0, 1)
-                self.root.update()
-                time.sleep(1)
+        # if event.char == "x":
+        for i in range(9):
+            self.move_elev(0, 1)
+            self.root.update()
+            time.sleep(1)
 
     def create_people(self, floor_num=0):
         pep = self.canvas.create_oval(self.width - 25, self.height - 25, self.width - 35, self.height - 35,
@@ -103,15 +103,15 @@ class ElevatorUi:
         self.canvas.itemconfig(self.waitingPeople, text=f'Waiting people for the elevator:{self.countingPep}')
         self.update_drawing()
 
-    def move_people_to_elev(self, elev):
-        pep = self.peopleList[0]
-        self.canvas.move(pep, -self.width / self.elevNum * elev, 0)
+    def move_people_to_elev(self, elev, people):
+        pep = self.peopleList[people]
+        self.canvas.move(pep, -self.width / self.elevNum * (self.elevNum-elev-1), 0)
         self.update_drawing()
 
     def number_of_floors(self, min_floor, max_floor):
         count = 0
         for i in range(min_floor, max_floor + 1):
-            self.canvas.create_text(self.width - 20, self.height - 10 - self.height / self.floorsNum * count,
+            self.canvas.create_text(self.width - 20, self.height - 20 - self.height / self.floorsNum * count,
                                     text=f'{i}', anchor='w')
             count += 1
         self.update_drawing()
@@ -133,12 +133,18 @@ class ElevatorUi:
         self.update_drawing()
 
 
-# el = ElevatorUi(15, 5)
-# el.create_people(5)
-# el.create_people(6)
-# el.create_people(7)
-# el.entered_the_elev(2)
-# el.entered_the_elev(1)
-# el.exited_the_elev(1)
-# el.root.bind("<Key>", el.move_from_1_to_10)
-# el.draw()
+el = ElevatorUi(10, 2)
+el.number_of_floors(-5,4)
+for i in range(9):
+    el.create_people(i)
+    if i > 5:
+        el.move_people_to_elev(0, i)
+for i in range (9):
+    el.move_elev(0,1)
+    el.move_elev(1,1)
+    time.sleep(1)
+    el.update_drawing()
+for i in range (9):
+    time.sleep(1)
+    el.move_elev(1,-1)
+el.draw()
