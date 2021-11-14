@@ -35,6 +35,8 @@ class ElevatorUi:
         self.rectList = self.draw_elev()
         self.peopleList = []
         self.canvas.tag_raise(self.waitingPeople)
+        self.canvas.tag_raise(self.inElev)
+        self.canvas.tag_raise(self.finishedCall)
 
     def move_elev(self, elev, floors, speed=1):
         self.canvas.move(self.rectList[elev], 0, -self.height / self.floorsNum * floors * speed)
@@ -64,7 +66,7 @@ class ElevatorUi:
                 self.canvas.create_rectangle(self.width / self.elevNum * i, self.height,
                                              (self.width / self.elevNum * (i + 1)) - 20 - 200 / self.elevNum,
                                              self.height / self.floorsNum * (self.floorsNum - 1),
-                                             fill='black'))
+                                             fill='grey'))
         self.move_to_the_middle()
         self.update_drawing()
         return rect_list
@@ -133,18 +135,22 @@ class ElevatorUi:
         self.update_drawing()
 
 
-el = ElevatorUi(10, 2)
-el.number_of_floors(-5,4)
-for i in range(9):
-    el.create_people(i)
-    if i > 5:
-        el.move_people_to_elev(0, i)
-for i in range (9):
-    el.move_elev(0,1)
-    el.move_elev(1,1)
-    time.sleep(1)
-    el.update_drawing()
-for i in range (9):
-    time.sleep(1)
-    el.move_elev(1,-1)
-el.draw()
+# el = ElevatorUi(10, 2)
+# el.number_of_floors(-5,4)
+# for i in range(9):
+#     el.create_people(i)
+#     if i > 5:
+#         el.move_people_to_elev(0, i)
+# for i in range (9):
+#     el.move_elev(0,1)
+#     el.move_elev(1,1)
+#     time.sleep(1)
+#     el.update_drawing()
+#     el.entered_the_elev(i)
+#     if i== 8:
+#         for i in range (9):
+#             el.exited_the_elev(i)
+# for i in range (9):
+#     time.sleep(1)
+#     el.move_elev(1,-1)
+# el.draw()
