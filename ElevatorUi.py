@@ -133,24 +133,3 @@ class ElevatorUi:
         self.countingFinishedCalls += 1
         self.canvas.itemconfig(self.finishedCall, text=f'Finished calls:{self.countingFinishedCalls}')
         self.update_drawing()
-
-
-# el = ElevatorUi(10, 2)
-# el.number_of_floors(-5,4)
-# for i in range(9):
-#     el.create_people(i)
-#     if i > 5:
-#         el.move_people_to_elev(0, i)
-# for i in range (9):
-#     el.move_elev(0,1)
-#     el.move_elev(1,1)
-#     time.sleep(1)
-#     el.update_drawing()
-#     el.entered_the_elev(i)
-#     if i== 8:
-#         for i in range (9):
-#             el.exited_the_elev(i)
-# for i in range (9):
-#     time.sleep(1)
-#     el.move_elev(1,-1)
-# el.draw()
