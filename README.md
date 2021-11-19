@@ -2,8 +2,8 @@
 In here we will simulate the movement of elevator through a UI. As of now the algorithm only handles 1 call at a time.
 
 # ElevUi
-[[Link for 2 Elevators simultaor](https://youtu.be/HnYb2Hm9wEg)]
-[[Link for 1 Elevator simulator](https://youtu.be/-tUELfBsF24)]
+[Link for 2 Elevators simultaor](https://youtu.be/HnYb2Hm9wEg)
+[Link for 1 Elevator simulator](https://youtu.be/-tUELfBsF24)
 
 
 ## What's next
