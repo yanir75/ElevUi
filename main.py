@@ -77,7 +77,7 @@ def main(min1, max1, elev):
                 ui.move_elev(0, 1)
                 curpos1 += 1
                 ui.move_elev(1, 1)
-                curpos1 += 1
+                curpos2 += 1
                 ui.move_people_up1(pep, 1)
                 ui.move_people_up1(pep1, 1)
                 time.sleep(1)
@@ -85,7 +85,7 @@ def main(min1, max1, elev):
                 ui.move_elev(0, -1)
                 curpos1 += -1
                 ui.move_elev(1, 1)
-                curpos1 += 1
+                curpos2 += 1
                 ui.move_people_up1(pep, -1)
                 ui.move_people_up1(pep1, 1)
                 time.sleep(1)
@@ -124,30 +124,7 @@ def main(min1, max1, elev):
     ui.draw()
 
 
-def func2(x, ui, pep1, curpos2, max1, min1, curpos):
-    while curpos[curpos2] > x:
-        ui.move_elev(1, -1)
-        curpos[curpos2] += -1
-        time.sleep(1)
-    while curpos[curpos2] < x:
-        ui.move_elev(1, 1)
-        curpos[curpos2] += 1
-        time.sleep(1)
-    ui.entered_the_elev(pep1)
-    y = random.randint(0, max1 - min1)
-    while x == y:
-        y = random.randint(0, max1 - min1)
-    while curpos[curpos2] > y:
-        ui.move_elev(1, -1)
-        curpos[curpos2] += -1
-        ui.move_people_up1(pep1, -1)
-        time.sleep(1)
-    while curpos[curpos2] < y:
-        ui.move_elev(1, 1)
-        curpos[curpos2] += 1
-        ui.move_people_up1(pep1, 1)
-        time.sleep(1)
-    ui.exited_the_elev(pep1)
+
 
 
 if __name__ == '__main__':

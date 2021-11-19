@@ -137,8 +137,6 @@ class ElevatorUi:
         self.canvas.itemconfig(self.peopleList[num], fill='white')
         self.countingInElev += -1
         self.canvas.itemconfig(self.inElev, text=f'People in the elevator:{self.countingInElev}')
-        self.countingPep += -1
-        self.canvas.itemconfig(self.waitingPeople, text=f'Waiting people for the elevator:{self.countingPep}')
         self.countingFinishedCalls += 1
         self.canvas.itemconfig(self.finishedCall, text=f'Finished calls:{self.countingFinishedCalls}')
         self.update_drawing()
