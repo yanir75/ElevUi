@@ -3,7 +3,8 @@ In here we will simulate the movement of elevator through a UI. As of now the al
 
 # ElevUi
 Link for a youtube video which simulates two elevator  
-[2 Elevators simultaor](https://youtu.be/HnYb2Hm9wEg) 
+[2 Elevators simultaor](https://youtu.be/HnYb2Hm9wEg)  
+
 Link for a youtube video which simulates one elevator 
 [1 Elevator simulator](https://youtu.be/-tUELfBsF24)
 
