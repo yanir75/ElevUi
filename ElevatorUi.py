@@ -47,6 +47,10 @@ class ElevatorUi:
         self.canvas.move(pep, 0, -self.height / self.floorsNum * where_to)
         self.update_drawing()
 
+    def move_people_up1(self, pep, where_to):
+        self.canvas.move(self.peopleList[pep], 0, -self.height / self.floorsNum * where_to)
+        self.update_drawing()
+
     def draw_floors(self):
         for i in range(self.floorsNum):
             self.canvas.create_line(0, self.height / self.floorsNum * i, self.width - 100 / self.elevNum,
@@ -103,29 +107,34 @@ class ElevatorUi:
         self.move_people_up(pep, floor_num)
         self.countingPep += 1
         self.canvas.itemconfig(self.waitingPeople, text=f'Waiting people for the elevator:{self.countingPep}')
+
         self.update_drawing()
+        return pep
 
     def move_people_to_elev(self, elev, people):
         pep = self.peopleList[people]
-        self.canvas.move(pep, -self.width / self.elevNum * (self.elevNum-elev-1), 0)
+        self.canvas.move(pep, -self.width / self.elevNum * (self.elevNum - elev - 1), 0)
         self.update_drawing()
 
-    def number_of_floors(self, min_floor, max_floor):
+    def number_of_floors(self, min1_floor, max1_floor):
         count = 0
-        for i in range(min_floor, max_floor + 1):
+        for i in range(min1_floor, max1_floor + 1):
             self.canvas.create_text(self.width - 20, self.height - 20 - self.height / self.floorsNum * count,
                                     text=f'{i}', anchor='w')
             count += 1
         self.update_drawing()
 
     def entered_the_elev(self, num):
-        self.canvas.itemconfig(self.peopleList[num], fill='white')
+        self.canvas.itemconfig(self.peopleList[num], fill='blue')
         self.countingInElev += 1
+        self.countingPep+=-1
+        self.canvas.itemconfig(self.waitingPeople, text=f'Waiting people for the elevator:{self.countingPep}')
+        self.update_drawing()
         self.canvas.itemconfig(self.inElev, text=f'People in the elevator:{self.countingInElev}')
         self.update_drawing()
 
     def exited_the_elev(self, num):
-        self.canvas.itemconfig(self.peopleList[num], fill='green')
+        self.canvas.itemconfig(self.peopleList[num], fill='white')
         self.countingInElev += -1
         self.canvas.itemconfig(self.inElev, text=f'People in the elevator:{self.countingInElev}')
         self.countingPep += -1
